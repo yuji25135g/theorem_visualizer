@@ -33,9 +33,11 @@ export const useStateGraphData = (
       .flat()
       .filter(
         (d, i, array) =>
-          array.findIndex(
-            (e) => e.from === d.from && e.label === d.label && e.to === d.to
-          ) === i
+          array
+            .slice()
+            .reverse()
+            .findIndex((e) => e.from === d.from && e.to === d.to) ===
+          array.length - 1 - i
       ),
   };
 
