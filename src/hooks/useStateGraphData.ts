@@ -12,13 +12,13 @@ export const useStateGraphData = (
 ): StateGraphData => {
   const graph = {
     nodes: [
-      "A |- A",
-      ...new Set(
-        stateDataList
+      ...new Set([
+        "A |- A",
+        ...stateDataList
           .slice(0, step)
           .map((d) => d.nodes)
-          .flat()
-      ),
+          .flat(),
+      ]),
     ].map((d) => ({ id: d, label: d })),
     edges: stateDataList
       .slice(0, step)
