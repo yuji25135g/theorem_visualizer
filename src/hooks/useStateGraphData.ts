@@ -10,18 +10,21 @@ export const useStateGraphData = (
   stateDataList: StateData[],
   step: number
 ): StateGraphData => {
+  if (stateDataList.length === 0) {
+    return { graph: { nodes: [], edges: [] }, events: [] };
+  }
   const graph = {
     nodes: [
       ...new Set([
-        "A |- A",
+        stateDataList[0].from,
         ...stateDataList
-          .slice(0, step)
+          .slice(0, step - 1)
           .map((d) => d.nodes)
           .flat(),
       ]),
     ].map((d) => ({ id: d, label: d })),
     edges: stateDataList
-      .slice(0, step)
+      .slice(0, step - 1)
       .filter((d) => d.from)
       .map((d) =>
         d.nodes.map((n, i) => ({

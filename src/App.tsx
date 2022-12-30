@@ -22,7 +22,11 @@ const App = () => {
       <CSVReader setData={setData} setStep={setStep} />
       <StateNetwork data={data} step={step} />
       <Typography>Step: {step}</Typography>
-      <Pagination count={data.length} page={step} onChange={handleChangeStep} />
+      <Pagination
+        count={data.length + 1}
+        page={step}
+        onChange={handleChangeStep}
+      />
     </>
   );
 };
